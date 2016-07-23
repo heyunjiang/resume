@@ -1,0 +1,184 @@
+@mixin opacity($res) {
+  filter:alpha(opacity=$res*100);
+  -moz-opacity: $res;
+  -khtml-opacity: $res;
+  opacity: $res;
+}
+@mixin horizontal-line($height:30px, $line-height:30px, $font-size:26px) {
+  height: $height;
+  line-height: $line-height;
+  font-size: $font-size;
+}
+@mixin my-linear-gradient($deg:45deg,$color1:#020031 0,$color2:#6d3353 100%) {
+  background:-moz-linear-gradient($deg,$color1,$color2);/*Mozilla*/
+  background:-webkit-gradient($deg,$color1,$color2);/*Old gradient for webkit*/
+  background:-webkit-linear-gradient($deg,$color1,$color2);/*new gradient for Webkit*/
+  background:-o-linear-gradient($deg,$color1,$color2); /*Opera11*/
+  background:linear-gradient($deg,$color1,$color2); 
+}
+@mixin my-box($width:100%,$height:100%,$border:1px solid #ccc,$boxShadow:10px 10px 5px #888888) {
+   width:$width;
+   height:$height;
+   border:$border;
+   box-shadow:$boxShadow;
+   display: block;
+   position: relative;
+}/*need complete*/
+@mixin my-position($style: absolute,$left: 0,$top: 0,$z-index: 1){
+  position: $style;
+  left: $left;
+  top: $top;
+  z-index: $z-index;
+}
+
+@mixin transform($trans) {
+  -webkit-transform: $trans;
+  transform: $trans;
+}
+$headerTextTranslateX:100%;
+
+@-webkit-keyframes headerTextLeft{
+  0%{
+    @include transform(translateX(-$headerTextTranslateX));
+  }
+  100%{
+    @include transform(translateX(0));
+  }
+}
+@keyframes headerTextLeft{
+  0%{
+    @include transform(translateX(-$headerTextTranslateX));
+  }
+  100%{
+    @include transform(translateX(0));
+  }
+}
+@-webkit-keyframes headerTextRight{
+  0%{
+    @include transform(translateX($headerTextTranslateX));
+  }
+  100%{
+    @include transform(translateX(0));
+  }
+}
+@keyframes headerTextRight{
+  0%{
+    @include transform(translateX($headerTextTranslateX));
+  }
+  100%{
+    @include transform(translateX(0));
+  }
+}
+@-webkit-keyframes opacity{
+  0%{
+    @include opacity(1);
+  }
+  100%{
+    @include opacity(0);
+  }
+}
+@keyframes opacity{
+  0%{
+    @include opacity(1);
+  }
+  100%{
+    @include opacity(0);
+  }
+}
+
+.center-text {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: center;
+}
+.full {
+  width: 100%;
+  height: 100%;
+}
+.full-absolute {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.full-relative {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.inline-div {
+  display: inline-block;
+  *zoom: 1;
+  *display: inline;
+}
+.float-left {float: left;}
+.float-right {float: right;}
+.pointer-cursor {cursor: pointer;}
+.bgimg {width:100%;}
+.des-content {
+  font-size: 18px;
+  font-weight: normal;
+  text-indent: 2.2em;
+  letter-spacing: .1em;
+  line-height: 1.5;
+  text-align: justify;
+}
+.center{text-align: center;}
+.bg-transparent {background-color: transparent;}
+.padding0 {padding: 0;}
+.overflow-visible {
+  overflow: visible !important;
+}
+// center nav
+.center-nav {
+  position: relative;
+  &>ul {
+    margin: 25px auto 0;
+    width: 70%;
+    position: relative;
+    &>li {
+      float:left;
+      min-width: 30px;
+      @include horizontal-line(50px,50px,18px);
+      list-style-type:none;
+      text-align: center;
+      overflow: hidden;
+      cursor: pointer;
+      &:hover {
+        background: #fcac00;
+      }
+      a {
+        color: white;
+      }
+    }
+    @media (max-width: 900px) {
+      li{
+        clear: both;
+        min-width: 25px;
+      @include horizontal-line(30px,30px,16px);
+      }
+    }
+  }
+}
+.hover-rotate360 {
+  transition: all 0.3s ease-in-out 0s;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -moz-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+  &:hover {
+    transform:rotate(360deg);
+    -ms-transform:rotate(360deg);   /* IE 9 */
+    -moz-transform:rotate(360deg);  /* Firefox */
+    -webkit-transform:rotate(360deg); /* Safari and Chrome */
+    -o-transform:rotate(360deg);  /* Opera */
+  }
+}
+.flicker {
+  animation: opacity .5s linear;
+  animation-delay: .2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
